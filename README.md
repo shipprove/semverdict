@@ -25,6 +25,7 @@ SemVerdict is pre-MVP.
 Current local capability:
 
 - capture a public-surface snapshot with `semverdict capture`
+- check the current package against a committed snapshot with `semverdict check`
 
 Planned dogfood MVP capabilities:
 
@@ -48,37 +49,43 @@ Example target workflow:
 ```sh
 pnpm build
 node dist/cli/index.js capture --output .semverdict/baseline.json
+node dist/cli/index.js check
+```
+
+For this repository:
+
+```sh
+pnpm build
+pnpm semverdict:capture
+pnpm semverdict:check
 ```
 
 ## Planned Configuration
 
-```ts
-import { defineConfig } from "@shipprove/semverdict";
-
-export default defineConfig({
-  packageManager: "npm",
-  baseline: "npm:@scope/package@latest",
-  current: ".",
-  analyzers: {
-    packageExports: true,
-    packageBin: true,
-    typesEntry: true,
-    cliHelp: {
-      enabled: true,
-      commands: [
+```json
+{
+  "baseline": ".semverdict/baseline.json",
+  "current": ".",
+  "analyzers": {
+    "packageExports": true,
+    "packageBin": true,
+    "typesEntry": true,
+    "cliHelp": {
+      "enabled": true,
+      "commands": [
         {
-          name: "my-cli",
-          command: "my-cli --help"
+          "name": "my-cli",
+          "command": "my-cli --help"
         }
       ]
     }
   },
-  failOn: "breaking",
-  report: {
-    formats: ["terminal", "json", "markdown"],
-    outputDir: ".semverdict"
+  "failOn": "breaking",
+  "report": {
+    "formats": ["terminal", "json", "markdown"],
+    "outputDir": ".semverdict"
   }
-});
+}
 ```
 
 ## Planned GitHub Action
@@ -144,7 +151,7 @@ Reports should avoid embedding unredacted full command output and should apply b
 
 The project is currently being bootstrapped. Until `CONTRIBUTING.md` exists, contributors should:
 
-- keep changes aligned with `00-docs/semverdict-mvp-plan.md`
+- keep changes aligned with the project MVP specification
 - keep MVP scope narrow
 - add focused tests for behavior changes
 - document unresolved product decisions before coding around them
