@@ -1,0 +1,38 @@
+{
+  "name": "@shipprove/semverdict",
+  "version": "0.1.0",
+  "description": "Detect SemVer compatibility risks from package public surface changes.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "bin": {
+    "semverdict": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "semverdict:capture": "node dist/cli/index.js capture --output .semverdict/baseline.json",
+    "semverdict:check": "node dist/cli/index.js check"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.14"
+  }
+}
