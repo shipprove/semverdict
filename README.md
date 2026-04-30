@@ -55,10 +55,13 @@ node dist/cli/index.js check
 For this repository:
 
 ```sh
+pnpm install --frozen-lockfile
 pnpm build
 pnpm semverdict:capture
 pnpm semverdict:check
 ```
+
+`pnpm semverdict:capture` updates the committed baseline intentionally. Normal verification should run `pnpm semverdict:check` without regenerating that baseline.
 
 ## Planned Configuration
 
@@ -109,13 +112,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: corepack enable
-      - run: npm ci
-      - run: npm run build
-      - uses: shipprove/semverdict@v0
+      - uses: pnpm/action-setup@v4
         with:
-          baseline: npm:@scope/package@latest
-          fail-on: breaking
+          version: 10.33.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm semverdict:check
 ```
 
 PR comments are planned as opt-in. GitHub Step Summary should be the default reporting target.

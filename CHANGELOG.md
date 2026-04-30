@@ -17,3 +17,4 @@ This project intends to follow SemVer once packages are published. During `0.x`,
 - Terminal, JSON, and Markdown report output for local dogfooding.
 - Initial dogfood baseline and JSON config.
 - Initial decision log.
+- GitHub Actions workflow for build, tests, and dogfood checking.
