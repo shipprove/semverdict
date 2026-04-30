@@ -24,7 +24,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "semverdict:capture": "node dist/cli/index.js capture --output .semverdict/baseline.json",
+    "semverdict:capture": "node dist/cli/index.js capture --config semverdict.config.json --output .semverdict/baseline.json",
     "semverdict:check": "node dist/cli/index.js check"
   },
   "engines": {

@@ -1,0 +1,30 @@
+{
+  "baseline": ".semverdict/baseline.json",
+  "current": ".",
+  "analyzers": {
+    "packageExports": true,
+    "packageBin": true,
+    "typesEntry": true,
+    "cliHelp": {
+      "enabled": true,
+      "commands": [
+        {
+          "name": "semverdict",
+          "command": "node dist/cli/index.js --help"
+        }
+      ]
+    }
+  },
+  "failOn": "breaking",
+  "report": {
+    "formats": ["terminal", "json", "markdown"],
+    "outputDir": ".semverdict"
+  },
+  "suppressions": [],
+  "limits": {
+    "perCommandTimeoutMs": 120000,
+    "totalTimeoutMs": 1200000,
+    "maxOutputBytes": 204800,
+    "maxReportBytes": 262144
+  }
+}

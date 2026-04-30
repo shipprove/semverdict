@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1",
+  "package": {
+    "name": "@shipprove/semverdict",
+    "version": "0.1.0",
+    "packageJson": {
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.js"
+        }
+      },
+      "bin": {
+        "semverdict": "./dist/cli/index.js"
+      },
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "exports": [
+    {
+      "subpath": ".",
+      "condition": "import",
+      "target": "./dist/index.js",
+      "targetExists": true
+    },
+    {
+      "subpath": ".",
+      "condition": "types",
+      "target": "./dist/index.d.ts",
+      "targetExists": true
+    }
+  ],
+  "bins": [
+    {
+      "name": "semverdict",
+      "target": "./dist/cli/index.js",
+      "targetExists": true,
+      "hasShebang": true
+    }
+  ],
+  "types": [
+    {
+      "source": "types",
+      "path": "./dist/index.d.ts",
+      "exists": true
+    },
+    {
+      "source": "exports",
+      "path": "./dist/index.d.ts",
+      "exists": true
+    }
+  ],
+  "cliHelp": [
+    {
+      "name": "semverdict",
+      "command": "node dist/cli/index.js --help",
+      "normalizedOutput": "SemVerdict\n\nUsage:\n  semverdict capture --output <path> [--current <path>]\n  semverdict check [--config <path>]\n\nCommands:\n  capture    Capture the current package public surface\n  check      Compare current surface with the configured baseline",
+      "flags": [
+        "--config",
+        "--current",
+        "--output"
+      ],
+      "subcommands": [
+        "capture",
+        "check"
+      ]
+    }
+  ],
+  "metadata": {
+    "capturedAt": "2026-04-30T04:34:22.693Z",
+    "source": "."
+  }
+}
