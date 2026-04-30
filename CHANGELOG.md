@@ -11,3 +11,5 @@ This project intends to follow SemVer once packages are published. During `0.x`,
 - Initial repository documentation for SemVerdict.
 - Initial README for users and contributors.
 - Initial changelog.
+- TypeScript package foundation for the SemVerdict CLI.
+- `semverdict capture` for package exports, bin, and declaration entry snapshots.

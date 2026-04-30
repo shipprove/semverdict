@@ -4,7 +4,7 @@ Detect breaking-change risks from the actual public surface of your package.
 
 SemVerdict is a CLI and planned GitHub Action for JavaScript and TypeScript package maintainers. It compares a previous release with the current artifact and reports SemVer-relevant changes in package exports, binaries, TypeScript declaration entries, and CLI help output.
 
-This repository is in the initial implementation phase. The public package and GitHub Action are not published yet.
+This repository is in the initial implementation phase. The CLI can capture this package's public surface locally, but the public package and GitHub Action are not published yet.
 
 ## Why
 
@@ -22,10 +22,13 @@ SemVerdict focuses on that surface so maintainers can catch compatibility risks 
 
 SemVerdict is pre-MVP.
 
-Planned MVP capabilities:
+Current local capability:
 
-- capture a public-surface snapshot
-- compare `npm:<package>@<version>`, local directories, or saved snapshots
+- capture a public-surface snapshot with `semverdict capture`
+
+Planned dogfood MVP capabilities:
+
+- compare the current package against a committed saved snapshot
 - classify changes as `breaking`, `warning`, or `info`
 - produce terminal, JSON, Markdown, and GitHub Step Summary reports
 - support CI gating through `fail-on: breaking | error | never`
@@ -43,9 +46,8 @@ semverdict report
 Example target workflow:
 
 ```sh
-npx semverdict check \
-  --baseline npm:@scope/package@latest \
-  --current .
+pnpm build
+node dist/cli/index.js capture --output .semverdict/baseline.json
 ```
 
 ## Planned Configuration
